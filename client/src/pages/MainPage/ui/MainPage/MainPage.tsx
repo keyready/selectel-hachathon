@@ -2,23 +2,17 @@ import { Page } from 'widgets/Page';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text } from 'shared/UI/Text';
 import { HStack, VStack } from 'shared/UI/Stack';
-import { useMemo } from 'react';
 import { Button } from 'shared/UI/Button';
 import { Icon } from 'shared/UI/Icon/Icon';
 import MainLogoIcon from 'shared/assets/icons/logo.svg';
 import TelegramIcon from 'shared/assets/icons/telegram.svg';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
 import classes from './MainPage.module.scss';
 
 const MainPage = () => {
-    // @ts-ignore
-    const { WebApp, initDataUnsafe } = window.Telegram;
-
-    const username = useMemo<string>(
-        () => initDataUnsafe?.user?.first_name || initDataUnsafe?.user?.username || '',
-        [initDataUnsafe?.user?.first_name, initDataUnsafe?.user?.username],
-    );
+    const { user } = useTelegram();
 
     const navigate = useNavigate();
 
@@ -26,7 +20,7 @@ const MainPage = () => {
         <Page className={classNames(classes.MainPage, {}, [])}>
             <VStack gap="0" maxW justify="center" align="center">
                 <Text align="center" size="large" title="Приветствуем тебя," />
-                <Text align="center" size="large" title={username || 'дорогой донор!'} />
+                <Text align="center" size="large" title={user?.username || 'дорогой донор!'} />
             </VStack>
 
             <VStack gap="8" maxW justify="center" align="center">
