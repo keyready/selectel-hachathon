@@ -16,6 +16,7 @@ import AwardIcon from 'shared/assets/icons/award.svg';
 import NoteCheckIcon from 'shared/assets/icons/note-check.svg';
 import GameIcon from 'shared/assets/icons/game.svg';
 import BookOpenIcon from 'shared/assets/icons/book-open.svg';
+import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
 import classes from './MenuPage.module.scss';
 
 interface MenuPageProps {
@@ -25,13 +26,13 @@ interface MenuPageProps {
 const MenuPage = memo((props: MenuPageProps) => {
     const { className } = props;
 
-    const username = 'Андрей';
+    const { user } = useTelegram();
 
     return (
         <Page className={classNames(classes.MenuPage, {}, [className])}>
             <VStack gap="24" maxW>
                 <VStack maxW align="center">
-                    <Text align="center" size="large" title={`Привет, ${username}`} />
+                    <Text align="center" size="large" title={`Привет, ${user?.first_name}`} />
                     <Text align="center" title="Мы рады снова тебя видеть!" />
                 </VStack>
 
