@@ -1,9 +1,9 @@
 .Button {
     cursor: pointer;
-    padding: 5px 15px;
+    padding: 15px 30px;
     border-radius: 5px;
-    color: var(--inverted-primary-color);
-    background: var(--inverted-bg-color);
+    color: var(--button-text-color);
+    background: var(--button-bg-color);
     font: var(--font-m);
     transition: 200ms;
 
@@ -20,38 +20,18 @@
     }
 }
 
-.inverted {
-    color: var(--primary-color);
-    background: var(--bg-color);
-
-    &:active {
-        outline: 1px solid var(--primary-color);
-    }
-
-    &:hover {
-        filter: grayscale(0.6);
-    }
-
-    &:focus {
-        box-shadow: 1px 1px 4px black;
-    }
+.maxW {
+    width: 100%;
 }
 
-.outlined {
-    background: none;
-    outline: 2px solid var(--navbar-bg);
+.telegram {
+    background: linear-gradient(160.36deg, #2aabee 18.31%, #229ed9 81.69%);
+}
 
-    &:hover {
-        background: var(--navbar-bg);
-    }
-
-    &:active {
-        outline: 2px solid var(--primary-color);
-    }
-
-    &:focus {
-        box-shadow: 1px 1px 4px black;
-    }
+.donorSearch {
+    color: var(--donor-search-color);
+    background: #fff;
+    padding: 20px 30px;
 }
 
 .clear {
@@ -63,9 +43,9 @@
     outline: none;
 
     &:hover {
-        background: lightgrey;
-        border-radius: 6px;
         padding: 5px;
+        border-radius: 6px;
+        background: lightgrey;
     }
 
     &:active {
@@ -74,16 +54,5 @@
 
     &:focus {
         box-shadow: none;
-    }
-}
-
-.disabled {
-    cursor: not-allowed;
-    background: var(--card-bg);
-    outline: 2px solid var(--primary-color);
-
-    &:hover {
-        background: var(--card-bg);
-        outline: 2px solid var(--primary-color);
     }
 }
