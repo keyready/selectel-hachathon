@@ -17,6 +17,8 @@ import NoteCheckIcon from 'shared/assets/icons/note-check.svg';
 import GameIcon from 'shared/assets/icons/game.svg';
 import BookOpenIcon from 'shared/assets/icons/book-open.svg';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classes from './MenuPage.module.scss';
 
 interface MenuPageProps {
@@ -27,6 +29,7 @@ const MenuPage = memo((props: MenuPageProps) => {
     const { className } = props;
 
     const { user } = useTelegram();
+    const navigate = useNavigate();
 
     return (
         <Page className={classNames(classes.MenuPage, {}, [className])}>
@@ -37,7 +40,11 @@ const MenuPage = memo((props: MenuPageProps) => {
                 </VStack>
 
                 <VStack maxW gap="16">
-                    <Button className={classes.button} maxW>
+                    <Button
+                        onClick={() => navigate(RoutePath.createdonation)}
+                        className={classes.button}
+                        maxW
+                    >
                         <HStack maxW justify="center">
                             <Icon Svg={PlusCircleIcon} />
                             <Text size="small" title="Добавить донацию" />

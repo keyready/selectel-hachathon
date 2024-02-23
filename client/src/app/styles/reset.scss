@@ -2,11 +2,13 @@ li {
     list-style: inside;
 }
 
-ol, ul {
+ol,
+ul {
     margin: 0;
     padding: 0;
 
-    ol, ul {
+    ol,
+    ul {
         margin-left: 20px;
     }
 
@@ -15,7 +17,15 @@ ol, ul {
     }
 }
 
-body, h1, h2, h3, h4, h5, h6, textarea, p {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+textarea,
+p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -40,4 +50,23 @@ form {
 
 .p-tabview.p-component {
     width: 75%;
+}
+
+.p-component {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.p-menuitem,
+.p-breadcrumb-home {
+    list-style: none;
+}
+
+.p-menuitem-link {
+    &:link,
+    &:visited {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
 }

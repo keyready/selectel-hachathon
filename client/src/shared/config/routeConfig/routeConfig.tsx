@@ -3,6 +3,7 @@ import { MainPage } from 'pages/MainPage';
 import { NotFound } from 'pages/NotFound';
 import { AuthPage } from 'pages/AuthPage';
 import { MenuPage } from 'pages/MenuPage';
+import { CreateDonationPage } from 'pages/CreateDonationPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -11,6 +12,7 @@ export type AppRoutesProps = RouteProps & {
 export enum AppRoutes {
     MAIN = 'main',
     MENU = 'menu',
+    CREATEDONATION = 'createdonation',
     AUTHORIZATION = 'authorization',
 
     // last
@@ -19,6 +21,7 @@ export enum AppRoutes {
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
+    [AppRoutes.CREATEDONATION]: '/create_donation',
     [AppRoutes.MENU]: '/menu',
     [AppRoutes.AUTHORIZATION]: '/forbidden',
 
@@ -34,6 +37,10 @@ export const routerConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MENU]: {
         path: RoutePath.menu,
         element: <MenuPage />,
+    },
+    [AppRoutes.CREATEDONATION]: {
+        path: RoutePath.createdonation,
+        element: <CreateDonationPage />,
     },
     [AppRoutes.AUTHORIZATION]: {
         path: RoutePath.authorization,
