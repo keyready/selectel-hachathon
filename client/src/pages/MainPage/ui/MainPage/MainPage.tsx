@@ -9,12 +9,21 @@ import TelegramIcon from 'shared/assets/icons/telegram.svg';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
+import { useCallback } from 'react';
 import classes from './MainPage.module.scss';
 
 const MainPage = () => {
     const { user } = useTelegram();
 
     const navigate = useNavigate();
+
+    const handleTelegramLoginClick = useCallback(() => {
+        const yourBotId: string = '6453776863';
+        const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${encodeURIComponent(
+            window.location.origin,
+        )}`;
+        window.open(authUrl, '_blank');
+    }, []);
 
     return (
         <Page className={classNames(classes.MainPage, {}, [])}>
@@ -32,7 +41,7 @@ const MainPage = () => {
                     </HStack>
                 </Button>
                 <Text size="large" text="или" />
-                <Button maxW variant="donorSearch">
+                <Button onClick={handleTelegramLoginClick} maxW variant="donorSearch">
                     <Icon Svg={MainLogoIcon} className={classes.logo} />
                 </Button>
                 <Text size="large" text="или" />
