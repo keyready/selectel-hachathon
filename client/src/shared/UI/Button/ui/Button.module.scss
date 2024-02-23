@@ -29,9 +29,14 @@
 }
 
 .donorSearch {
+    padding: 20px 30px;
     color: var(--donor-search-color);
     background: #fff;
-    padding: 20px 30px;
+}
+
+.danger {
+    background: var(--donor-search-color);
+    color: var(--primary-color);
 }
 
 .clear {
