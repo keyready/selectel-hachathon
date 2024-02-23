@@ -1,0 +1,15 @@
+:root {
+    --bg-color: var(--tg-theme-bg-color) #fff;
+    --inverted-bg-color: var(--tg-theme-secondary-bg-color) #000;
+
+    // текст
+    --primary-color: var(--tg-theme-text-color) #000;
+    --inverted-primary-color: #383838;
+
+    // вторичный цвет
+    --secondary-color: var(--tg-theme-hint-color) #4e4e4e;
+    --inverted-secondary-color: #04ff04;
+
+    // линки
+    --link-color: var(--tg-theme-link-color) var(--secondary-color);
+}
