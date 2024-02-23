@@ -20,7 +20,7 @@ const MainPage = () => {
         <Page className={classNames(classes.MainPage, {}, [])}>
             <VStack gap="0" maxW justify="center" align="center">
                 <Text align="center" size="large" title="Приветствуем тебя," />
-                <Text align="center" size="large" title={user?.username || 'дорогой донор!'} />
+                <Text align="center" size="large" title={user?.first_name || 'дорогой донор!'} />
             </VStack>
 
             <VStack gap="8" maxW justify="center" align="center">
