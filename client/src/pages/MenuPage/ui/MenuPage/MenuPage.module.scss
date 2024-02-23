@@ -1,0 +1,20 @@
+.MenuPage {
+
+}
+
+.button {
+    padding: 10px;
+
+    &:nth-child(3) {
+        background: #fff;
+        h3 { color: var(--donor-search-color); }
+    }
+
+    &:nth-child(4) {
+        background: #a185f1;
+    }
+
+    &:nth-child(5) {
+        background: #ed7091;
+    }
+}

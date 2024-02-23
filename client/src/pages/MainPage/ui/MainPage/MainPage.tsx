@@ -1,11 +1,14 @@
 import { Page } from 'widgets/Page';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text } from 'shared/UI/Text';
-import { VStack } from 'shared/UI/Stack';
-import { useCallback, useEffect, useMemo } from 'react';
+import { HStack, VStack } from 'shared/UI/Stack';
+import { useMemo } from 'react';
 import { Button } from 'shared/UI/Button';
 import { Icon } from 'shared/UI/Icon/Icon';
 import MainLogoIcon from 'shared/assets/icons/logo.svg';
+import TelegramIcon from 'shared/assets/icons/telegram.svg';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classes from './MainPage.module.scss';
 
 // @ts-ignore
@@ -17,6 +20,8 @@ const MainPage = () => {
         [],
     );
 
+    const navigate = useNavigate();
+
     return (
         <Page className={classNames(classes.MainPage, {}, [])}>
             <VStack gap="0" maxW justify="center" align="center">
@@ -26,8 +31,11 @@ const MainPage = () => {
 
             <VStack gap="8" maxW justify="center" align="center">
                 <Text align="center" title="Войти с помощью" />
-                <Button maxW variant="telegram">
-                    <Text align="center" title="Телеграм" />
+                <Button onClick={() => navigate(RoutePath.menu)} maxW variant="telegram">
+                    <HStack maxW justify="center" gap="8">
+                        <Icon Svg={TelegramIcon} className={classes.tgIcon} />
+                        <Text align="center" title="Телеграм" />
+                    </HStack>
                 </Button>
                 <Text size="large" text="или" />
                 <Button maxW variant="donorSearch">

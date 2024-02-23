@@ -4,6 +4,7 @@ import { HStack } from 'shared/UI/Stack';
 import MainLogoIcon from 'shared/assets/icons/logo.svg';
 import { Icon } from 'shared/UI/Icon/Icon';
 import { Button } from 'shared/UI/Button';
+import { AppLink } from 'shared/UI/AppLink';
 import classes from './Navbar.module.scss';
 
 export interface NavbarProps {
@@ -25,7 +26,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             justify="between"
             className={classNames(classes.Navbar, {}, [className])}
         >
-            <Icon Svg={MainLogoIcon} className={classes.logo} />
+            <AppLink to="//donorsearch.org">
+                <Icon Svg={MainLogoIcon} className={classes.logo} />
+            </AppLink>
             <Button variant="danger" className={classes.button} onClick={closeWindow}>
                 Выйти
             </Button>

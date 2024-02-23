@@ -3,8 +3,6 @@ import { useTheme } from 'app/providers/ThemeProvider';
 import { AppRouter } from 'app/providers/AppRouter';
 import { Suspense } from 'react';
 import { Navbar } from 'widgets/Navbar';
-import { Searchbar } from 'widgets/Searchbar';
-import { Footer } from 'widgets/Footer';
 
 export const App = () => {
     const { theme } = useTheme();
@@ -14,7 +12,6 @@ export const App = () => {
             <Suspense fallback="">
                 <Navbar />
                 <AppRouter />
-                <Footer />
             </Suspense>
         </div>
     );

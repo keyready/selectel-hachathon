@@ -7,4 +7,5 @@ export const variantsMapper: Record<buttonVariants, string> = {
     telegram: classes.telegram,
     donorSearch: classes.donorSearch,
     danger: classes.danger,
+    warning: classes.warning,
 };

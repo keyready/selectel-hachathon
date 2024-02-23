@@ -1,1 +1,7 @@
-export type buttonVariants = 'primary' | 'telegram' | 'donorSearch' | 'clear' | 'danger';
+export type buttonVariants =
+    | 'primary'
+    | 'telegram'
+    | 'donorSearch'
+    | 'clear'
+    | 'danger'
+    | 'warning';

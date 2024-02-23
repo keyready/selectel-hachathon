@@ -35,8 +35,13 @@
 }
 
 .danger {
-    background: var(--donor-search-color);
     color: var(--primary-color);
+    background: var(--donor-search-color);
+}
+
+.warning {
+    color: var(--primary-color);
+    background: #f8a917;
 }
 
 .clear {
