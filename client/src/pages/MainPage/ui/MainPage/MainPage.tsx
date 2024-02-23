@@ -22,7 +22,7 @@ const MainPage = () => {
         const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${encodeURIComponent(
             window.location.origin,
         )}`;
-        window.open(authUrl, '_blank');
+        window.location.href = authUrl;
     }, []);
 
     return (
