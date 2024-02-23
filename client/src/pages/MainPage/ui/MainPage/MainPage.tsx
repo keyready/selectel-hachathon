@@ -11,13 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classes from './MainPage.module.scss';
 
-// @ts-ignore
-const { WebApp, initDataUnsafe } = window.Telegram;
-
 const MainPage = () => {
+    // @ts-ignore
+    const { WebApp, initDataUnsafe } = window.Telegram;
+
     const username = useMemo<string>(
         () => initDataUnsafe?.user?.first_name || initDataUnsafe?.user?.username || '',
-        [],
+        [initDataUnsafe?.user?.first_name, initDataUnsafe?.user?.username],
     );
 
     const navigate = useNavigate();

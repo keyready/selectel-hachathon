@@ -8,7 +8,7 @@
     transition: 200ms;
 
     &:hover {
-        background: var(--bg-color);
+        background: var(--button-bg-hover-color);
     }
 
     &:active {
@@ -37,11 +37,19 @@
 .danger {
     color: var(--primary-color);
     background: var(--donor-search-color);
+
+    &:hover {
+        background: #fb7e79;
+    }
 }
 
 .warning {
     color: var(--primary-color);
     background: #f8a917;
+
+    &:hover {
+        background: #fbda9f;
+    }
 }
 
 .clear {
