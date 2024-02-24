@@ -25,7 +25,7 @@ const MainPage = () => {
                 const authData = JSON.parse(atob(location.hash.split('=')[1]));
                 // TODO здесь можно запрос на
                 //  сервер отправлять для получения какой-либо информации
-                navigate(RoutePath.menu);
+                // navigate(RoutePath.menu);
             } else console.log('Ошибка прочтения токена');
         } else console.log('Токена нет');
     }, [location, navigate]);
