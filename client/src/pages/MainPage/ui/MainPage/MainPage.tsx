@@ -21,25 +21,21 @@ const MainPage = () => {
 
     useEffect(() => {
         if (location?.hash) {
-            const authResult = location.hash.split('=');
-            console.log(authResult);
-            toast.success(location.hash);
-            if (authResult?.length) {
-                // const authData = JSON.parse(atob(location.hash.split('=')[1]));
-                // const Atob = atob(location?.hash?.split('=')[1]);
-                // if (Atob) {
-                //     // TODO здесь можно запрос на
-                //     //  сервер отправлять для получения какой-либо информации
-                //     navigate(RoutePath.menu);
-                // }
-            } else toast.error('Ошибка прочтения токена');
-        } else toast.error('Токена нет');
+            const regex = /tgAuthResult=([^&]*)/;
+            const match = location?.hash.match(regex);
+
+            if (match && match[1]) {
+                console.log('Значение параметра tgAuthResult:', match[1]);
+            } else {
+                console.log('Параметр tgAuthResult не найден');
+            }
+        }
     }, [location.hash, navigate]);
 
     const handleTelegramLoginClick = useCallback(() => {
-        // const yourBotId: string = '7107142378';
-        // const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${RoutePath.menu}`;
-        // window.location.href = authUrl;
+        const yourBotId: string = '7107142378';
+        const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${RoutePath.menu}`;
+        window.location.href = authUrl;
     }, []);
 
     return (
