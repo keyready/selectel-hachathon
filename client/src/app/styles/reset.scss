@@ -71,3 +71,16 @@ form {
 .p-dropdown-item {
     list-style: none;
 }
+
+.p-fileupload-choose {
+    width: 100%;
+    justify-content: center;
+
+    .p-button-label {
+        flex: none;
+    }
+}
+
+.p-button.p-component.p-fileupload-choose {
+    background: var(--button-bg-color);
+}

@@ -74,3 +74,13 @@
         box-shadow: none;
     }
 }
+
+.disabled {
+    color: lightgrey;
+    background: lightcyan;
+
+    &:hover {
+        color: lightgrey;
+        background: lightcyan;
+    }
+}
