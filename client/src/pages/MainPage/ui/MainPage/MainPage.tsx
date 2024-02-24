@@ -30,7 +30,21 @@ const MainPage = () => {
                     method: 'post',
                     body: atob(match[1]),
                     headers: { 'Content-Type': 'application/json' },
-                }).then((res) => console.log(res.headers));
+                }).catch((res) => {
+                    switch (202) {
+                        case 202: {
+                            navigate(
+                                `${RoutePath.register}?username=${
+                                    JSON.parse(atob(match[1])).username
+                                }`,
+                            );
+                            break;
+                        }
+                        default: {
+                            navigate(RoutePath.menu);
+                        }
+                    }
+                });
             } else {
                 console.log('Параметр tgAuthResult не найден');
             }

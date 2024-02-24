@@ -10,7 +10,9 @@ export const Notification = memo((props: NotificationProps) => (
                 background: 'linear-gradient(rgb(101, 178, 160) 0%, rgb(66, 31, 130) 100%)',
                 color: '#fff',
                 border: '1px solid var(--primary-color)',
-                fontSize: '14px',
+                fontSize: '16px',
+                fontFamily: '"Montserrat", sans-serif',
+                textAlign: 'center',
             },
         }}
         position="top-center"
