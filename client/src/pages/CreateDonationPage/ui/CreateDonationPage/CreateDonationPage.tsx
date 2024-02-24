@@ -12,6 +12,7 @@ import { Button } from 'shared/UI/Button';
 import { Route, useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { Loader } from 'shared/UI/Loader';
+import toast from 'react-hot-toast';
 import classes from './CreateDonationPage.module.scss';
 
 interface CreateDonationPageProps {
@@ -72,11 +73,30 @@ const CreateDonationPage = memo((props: CreateDonationPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
 
-            console.log({ selectedStation, donationDate, donationType, donationDocument });
             setIsLoading(true);
-            setTimeout(() => navigate(RoutePath.menu), 2000);
+            fetch('http://localhost:5000/api/add_donation', {
+                method: 'post',
+                body: JSON.stringify({
+                    selectedCity,
+                    selectedStation,
+                    donationDate,
+                    donationType,
+                    donationDocument,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    toast.success('Донация добавлена');
+                    return navigate(RoutePath.menu);
+                })
+                .catch((err) => {
+                    setIsLoading(false);
+                    toast.error('Произошла ошибка, попробуйте позже');
+                });
         },
-        [donationDate, donationDocument, donationType, selectedStation],
+        [donationDate, donationDocument, donationType, navigate, selectedCity, selectedStation],
     );
 
     const isButtonDisabled = useMemo<boolean>(
@@ -88,7 +108,7 @@ const CreateDonationPage = memo((props: CreateDonationPageProps) => {
     return (
         <Page className={classNames(classes.CreateDonationPage, {}, [className])}>
             <BreadCrumbs items={items} />
-            <h1>Добавить донацию</h1>
+            <Text size="large" title="Добавить донацию" />
 
             {isLoading && (
                 <div className={classes.loaderWrapper}>

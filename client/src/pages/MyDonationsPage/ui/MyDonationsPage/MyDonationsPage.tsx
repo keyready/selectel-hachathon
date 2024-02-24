@@ -1,7 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Page } from 'widgets/Page';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Text } from 'shared/UI/Text';
+import { BreadCrumbs } from 'shared/UI/BreadCrumbs';
 import classes from './MyDonationsPage.module.scss';
 
 interface MyDonationsPageProps {
@@ -11,9 +12,12 @@ interface MyDonationsPageProps {
 const MyDonationsPage = memo((props: MyDonationsPageProps) => {
     const { className } = props;
 
+    const items = useMemo<string[]>(() => ['Мои донации'], []);
+
     return (
         <Page className={classNames(classes.MyDonationsPage, {}, [className])}>
-            <Text title="Мои донации" />
+            <BreadCrumbs items={items} />
+            <Text size="large" title="Мои донации" />
         </Page>
     );
 });

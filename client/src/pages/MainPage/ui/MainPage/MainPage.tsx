@@ -19,16 +19,16 @@ const MainPage = () => {
     const location = useLocation();
 
     useEffect(() => {
-        // if (location.hash) {
-        //     const authResult = location.hash.split('=');
-        //     if (authResult.length) {
-        //         const authData = JSON.parse(atob(location.hash.split('=')[1]));
-        //         TODO здесь можно запрос на
-        //          сервер отправлять для получения какой-либо информации
-        //         navigate(RoutePath.menu);
-        // } else console.log('Ошибка прочтения токена');
-        // } else console.log('Токена нет');
-    }, []);
+        if (location?.hash) {
+            const authResult = location.hash.split('=');
+            if (authResult?.length) {
+                const authData = JSON.parse(atob(location.hash.split('=')[1]));
+                // TODO здесь можно запрос на
+                //  сервер отправлять для получения какой-либо информации
+                navigate(RoutePath.menu);
+            } else console.log('Ошибка прочтения токена');
+        } else console.log('Токена нет');
+    }, [location.hash, navigate]);
 
     const handleTelegramLoginClick = useCallback(() => {
         // const yourBotId: string = '6453776863';
