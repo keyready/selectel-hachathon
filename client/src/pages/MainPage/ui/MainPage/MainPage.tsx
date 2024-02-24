@@ -30,8 +30,8 @@ const MainPage = () => {
                     method: 'post',
                     body: atob(match[1]),
                     headers: { 'Content-Type': 'application/json' },
-                }).catch((res) => {
-                    switch (202) {
+                }).then((res) => {
+                    switch (res.status) {
                         case 202: {
                             navigate(
                                 `${RoutePath.register}?username=${
