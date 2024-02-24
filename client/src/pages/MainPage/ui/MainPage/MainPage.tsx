@@ -22,15 +22,15 @@ const MainPage = () => {
     useEffect(() => {
         if (location?.hash) {
             const authResult = location.hash.split('=');
-            toast.success(location?.hash?.split('=').join(' '));
+            toast.success(location.hash);
             if (authResult?.length) {
                 // const authData = JSON.parse(atob(location.hash.split('=')[1]));
-                const Atob = atob(location?.hash?.split('=')[1]);
-                if (Atob) {
-                    // TODO здесь можно запрос на
-                    //  сервер отправлять для получения какой-либо информации
-                    navigate(RoutePath.menu);
-                }
+                // const Atob = atob(location?.hash?.split('=')[1]);
+                // if (Atob) {
+                //     // TODO здесь можно запрос на
+                //     //  сервер отправлять для получения какой-либо информации
+                //     navigate(RoutePath.menu);
+                // }
             } else toast.error('Ошибка прочтения токена');
         } else toast.error('Токена нет');
     }, [location.hash, navigate]);
