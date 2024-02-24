@@ -6,16 +6,29 @@ import { Button } from 'shared/UI/Button';
 import { Icon } from 'shared/UI/Icon/Icon';
 import MainLogoIcon from 'shared/assets/icons/logo.svg';
 import TelegramIcon from 'shared/assets/icons/telegram.svg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import classes from './MainPage.module.scss';
 
 const MainPage = () => {
     const { user } = useTelegram();
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+            const authResult = location.hash.split('=');
+            if (authResult.length) {
+                const authData = JSON.parse(atob(location.hash.split('=')[1]));
+                // TODO здесь можно запрос на
+                //  сервер отправлять для получения какой-либо информации
+                navigate(RoutePath.menu);
+            } else console.log('Ошибка прочтения токена');
+        } else console.log('Токена нет');
+    }, [location, navigate]);
 
     const handleTelegramLoginClick = useCallback(() => {
         const yourBotId: string = '6453776863';
