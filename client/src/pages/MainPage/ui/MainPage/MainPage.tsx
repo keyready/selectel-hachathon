@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useTelegram } from 'shared/lib/hooks/useTelegram/useTelegram';
 import { useCallback, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import classes from './MainPage.module.scss';
 
 const MainPage = () => {
@@ -21,13 +22,17 @@ const MainPage = () => {
     useEffect(() => {
         if (location?.hash) {
             const authResult = location.hash.split('=');
+            toast.success(location?.hash?.split('=').join(' '));
             if (authResult?.length) {
                 // const authData = JSON.parse(atob(location.hash.split('=')[1]));
-                // TODO здесь можно запрос на
-                //  сервер отправлять для получения какой-либо информации
-                navigate(RoutePath.menu);
-            } else console.log('Ошибка прочтения токена');
-        } else console.log('Токена нет');
+                const Atob = atob(location?.hash?.split('=')[1]);
+                if (Atob) {
+                    // TODO здесь можно запрос на
+                    //  сервер отправлять для получения какой-либо информации
+                    navigate(RoutePath.menu);
+                }
+            } else toast.error('Ошибка прочтения токена');
+        } else toast.error('Токена нет');
     }, [location.hash, navigate]);
 
     const handleTelegramLoginClick = useCallback(() => {
