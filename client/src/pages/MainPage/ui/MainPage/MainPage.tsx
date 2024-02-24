@@ -19,21 +19,21 @@ const MainPage = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.hash) {
-            const authResult = location.hash.split('=');
-            if (authResult.length) {
-                const authData = JSON.parse(atob(location.hash.split('=')[1]));
-                // TODO здесь можно запрос на
-                //  сервер отправлять для получения какой-либо информации
-                // navigate(RoutePath.menu);
-            } else console.log('Ошибка прочтения токена');
-        } else console.log('Токена нет');
-    }, [location, navigate]);
+        // if (location.hash) {
+        //     const authResult = location.hash.split('=');
+        //     if (authResult.length) {
+        //         const authData = JSON.parse(atob(location.hash.split('=')[1]));
+        //         TODO здесь можно запрос на
+        //          сервер отправлять для получения какой-либо информации
+        //         navigate(RoutePath.menu);
+        // } else console.log('Ошибка прочтения токена');
+        // } else console.log('Токена нет');
+    }, []);
 
     const handleTelegramLoginClick = useCallback(() => {
-        const yourBotId: string = '6453776863';
-        const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${RoutePath.menu}`;
-        window.location.href = authUrl;
+        // const yourBotId: string = '6453776863';
+        // const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${RoutePath.menu}`;
+        // window.location.href = authUrl;
     }, []);
 
     return (
