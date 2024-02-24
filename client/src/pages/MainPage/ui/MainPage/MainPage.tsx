@@ -26,6 +26,11 @@ const MainPage = () => {
 
             if (match && match[1]) {
                 console.log('Значение параметра tgAuthResult:', match[1]);
+                fetch('http://localhost:5000/api/sign_up/telegram', {
+                    method: 'post',
+                    body: atob(match[1]),
+                    headers: { 'Content-Type': 'application/json' },
+                }).then((res) => console.log(res.headers));
             } else {
                 console.log('Параметр tgAuthResult не найден');
             }
