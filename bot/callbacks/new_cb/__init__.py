@@ -34,7 +34,7 @@ async def process_password(message: Message,state: FSMContext) -> None:
 
     user_data = await state.get_data()
 
-    resp=requests.post("http://localhost:5000/register",json=json.dumps({"user_data":user_data})).json()
+    resp=requests.post("http://31.129.48.233:5000/register",json=json.dumps({"user_data":user_data})).json()
     await message.answer("Данные того, кто зарегался {}}".format(resp))
 
     await state.clear()

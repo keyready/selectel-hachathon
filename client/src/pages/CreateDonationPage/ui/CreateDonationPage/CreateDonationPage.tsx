@@ -74,7 +74,7 @@ const CreateDonationPage = memo((props: CreateDonationPageProps) => {
             event.preventDefault();
 
             setIsLoading(true);
-            fetch('http://localhost:5000/api/add_donation', {
+            fetch('http://31.129.48.233:5000/api/add_donation', {
                 method: 'post',
                 body: JSON.stringify({
                     selectedCity,

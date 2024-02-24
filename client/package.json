@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "init": "npm i --force",
-        "start": "webpack serve --env port=3000 apiUrl=http://localhost:5000/",
-        "build": "webpack --env mode=production apiUrl=http://localhost:5000/",
+        "start": "webpack serve --env port=3000 apiUrl=http://31.129.48.233:5000/",
+        "build": "webpack --env mode=production apiUrl=http://31.129.48.233:5000/",
         "lint:project": "concurrently -n Prettier,ESlint,Stylelint -c blue,yellow,green \"npm run prettier\" \"npm run lint:ts\" \"npm run lint:scss\"",
         "prettier": "npx prettier --write **/*.{js,jsx,ts,tsx}",
         "lint:ts": "eslint \"**/*.{ts,tsx}\" --fix",

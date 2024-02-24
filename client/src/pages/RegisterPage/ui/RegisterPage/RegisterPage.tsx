@@ -73,7 +73,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setIsLoading(true);
-            fetch('http://localhost:5000/api/sign_up/telegram/email', {
+            fetch('http://31.129.48.233:5000/api/sign_up/telegram/email', {
                 method: 'post',
                 body: JSON.stringify({ email, username }),
                 headers: { 'Content-Type': 'application/json' },
@@ -91,7 +91,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setIsLoading(true);
-            fetch('http://localhost:5000/api/sign_up/custom', {
+            fetch('http://31.129.48.233:5000/api/sign_up/custom', {
                 method: 'post',
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-Type': 'application/json' },
@@ -110,7 +110,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setIsLoading(true);
-            fetch('http://localhost:5000/api/sign_up/donor-search', {
+            fetch('http://31.129.48.233:5000/api/sign_up/donor-search', {
                 method: 'post',
                 body: JSON.stringify({ email, password, first_name: firstName }),
                 headers: { 'Content-Type': 'application/json' },
@@ -129,7 +129,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setIsLoading(true);
-            fetch('http://localhost:5000/api/sign_in/donor-search', {
+            fetch('http://31.129.48.233:5000/api/sign_in/donor-search', {
                 method: 'post',
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-Type': 'application/json' },
