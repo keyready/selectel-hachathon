@@ -22,7 +22,7 @@ const MainPage = () => {
         if (location?.hash) {
             const authResult = location.hash.split('=');
             if (authResult?.length) {
-                const authData = JSON.parse(atob(location.hash.split('=')[1]));
+                // const authData = JSON.parse(atob(location.hash.split('=')[1]));
                 // TODO здесь можно запрос на
                 //  сервер отправлять для получения какой-либо информации
                 navigate(RoutePath.menu);
