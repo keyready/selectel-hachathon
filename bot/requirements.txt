@@ -1,0 +1,5 @@
+aiogram
+asyncio
+pydantic_settings
+requests
+pydantic
