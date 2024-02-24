@@ -9,7 +9,7 @@ import { AxiosInstance } from 'axios';
 import { UISchema } from 'features/UI';
 import { rtkApi } from 'shared/api/rtkApi';
 import { UserSchema } from 'entities/User';
-import { GoodSchema } from 'entities/Good';
+import { DonationSchema } from 'entities/Donation';
 
 export interface StateSchema {
     ui: UISchema;
@@ -17,7 +17,7 @@ export interface StateSchema {
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
     // asynchronous reducers
-    good?: GoodSchema;
+    donation?: DonationSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

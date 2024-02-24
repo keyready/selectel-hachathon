@@ -56,7 +56,11 @@ const MenuPage = memo((props: MenuPageProps) => {
                             <Text size="small" title="Запланировать донацию" />
                         </HStack>
                     </Button>
-                    <Button className={classes.button} maxW>
+                    <Button
+                        onClick={() => navigate(RoutePath.mydonation)}
+                        className={classes.button}
+                        maxW
+                    >
                         <HStack maxW justify="center">
                             <Icon Svg={BloodIcon} />
                             <Text size="small" title="Мои донации" />

@@ -76,11 +76,11 @@
 }
 
 .disabled {
-    color: lightgrey;
-    background: lightcyan;
+    color: #fff;
+    background: #31B54540;
 
     &:hover {
-        color: lightgrey;
-        background: lightcyan;
+        color: #fff;
+        background: #31B54540;
     }
 }

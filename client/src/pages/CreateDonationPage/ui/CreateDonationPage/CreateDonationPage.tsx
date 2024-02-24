@@ -9,31 +9,50 @@ import { Calendar } from 'primereact/calendar';
 import { Nullable } from 'primereact/ts-helpers';
 import { FileUpload, FileUploadHandlerEvent } from 'primereact/fileupload';
 import { Button } from 'shared/UI/Button';
+import { Route, useNavigate } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { Loader } from 'shared/UI/Loader';
 import classes from './CreateDonationPage.module.scss';
 
 interface CreateDonationPageProps {
     className?: string;
 }
 
+interface ICity {
+    id: number;
+    title: string;
+}
+
 const CreateDonationPage = memo((props: CreateDonationPageProps) => {
     const { className } = props;
 
-    const items: string[] = ['Добавить донацию'];
-    const donationTypes = useMemo(() => ['Платно', 'Безвозмездно'], []);
+    const items = useMemo<string[]>(() => ['Добавить донацию'], []);
+    const donationTypes = useMemo<string[]>(() => ['Платно', 'Безвозмездно'], []);
+
+    const navigate = useNavigate();
 
     const [stationsNames, setStationsNames] = useState<string[]>([]);
+    const [cities, setCities] = useState<ICity[]>([]);
+    const [selectedCity, setSelectedCity] = useState<ICity>();
     const [selectedStation, setSelectedStation] = useState<string>('');
     const [donationType, setDonationType] = useState<string>('');
     const [donationDate, setDonationDate] = useState<Nullable<Date>>(null);
     const [donationDocument, setDonationDocument] = useState<string | ArrayBuffer | null>('');
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     useEffect(() => {
-        fetch(
-            'https://api2.donorsearch.org/api/blood_stations/map/?bbox1=59.744410786472635,29.592746835620193&bbox2=60.2096799591528,30.948185068042072',
-        )
+        fetch('https://api2.donorsearch.org/api/cities/?all_bs=true')
             .then((res) => res.json())
-            .then((res) => setStationsNames(res.map((result: any) => result.title)));
+            .then((res) => setCities(res.results));
     }, []);
+
+    useEffect(() => {
+        if (selectedCity)
+            fetch(`https://api2.donorsearch.org/api/blood_stations/?city_id=${selectedCity?.id}`)
+                .then((res) => res.json())
+                .then((res) => setStationsNames(res.results.map((result: any) => result.title)));
+    }, [selectedCity]);
 
     const customBase64Uploader = async (event: FileUploadHandlerEvent) => {
         const file = event.files[0];
@@ -53,14 +72,17 @@ const CreateDonationPage = memo((props: CreateDonationPageProps) => {
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
 
-            console.log(selectedStation, donationDate, donationType, donationDocument);
+            console.log({ selectedStation, donationDate, donationType, donationDocument });
+            setIsLoading(true);
+            setTimeout(() => navigate(RoutePath.menu), 2000);
         },
         [donationDate, donationDocument, donationType, selectedStation],
     );
 
     const isButtonDisabled = useMemo<boolean>(
-        () => !(donationDate && donationDocument && donationType && selectedStation),
-        [donationDate, donationDocument, donationType, selectedStation],
+        () =>
+            !(selectedCity && donationDate && donationDocument && donationType && selectedStation),
+        [selectedCity, donationDate, donationDocument, donationType, selectedStation],
     );
 
     return (
@@ -68,8 +90,26 @@ const CreateDonationPage = memo((props: CreateDonationPageProps) => {
             <BreadCrumbs items={items} />
             <h1>Добавить донацию</h1>
 
+            {isLoading && (
+                <div className={classes.loaderWrapper}>
+                    <Loader />
+                </div>
+            )}
+
             <form onSubmit={handleFormSubmit}>
                 <VStack maxW>
+                    <HStack maxW className={classes.stations}>
+                        <Dropdown
+                            value={selectedCity}
+                            onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)}
+                            options={cities}
+                            optionLabel="title"
+                            filter
+                            placeholder="Выберите город"
+                            emptyMessage="Загрузка городов"
+                            emptyFilterMessage="По запросу ничего не найдено"
+                        />
+                    </HStack>
                     <HStack maxW className={classes.stations}>
                         <Dropdown
                             value={selectedStation}

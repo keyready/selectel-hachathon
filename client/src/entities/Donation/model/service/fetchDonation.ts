@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkConfig } from 'app/providers/StoreProvider';
+import { ThunkConfig } from 'app/providers/StoreProvider/config/StateSchema';
 import { AxiosError } from 'axios';
-import { Good } from '../types/Good';
+import { Donation } from '../types/Donation';
 
-export const fetchGood = createAsyncThunk<Good, string, ThunkConfig<string>>(
-    'Good/fetchGood',
-    async (GoodId, thunkAPI) => {
+export const fetchDonation = createAsyncThunk<Donation, string, ThunkConfig<string>>(
+    'Donation/fetchDonation',
+    async (DonationId, thunkAPI) => {
         const { extra, rejectWithValue } = thunkAPI;
 
         try {
-            const response = await extra.api.get<Good>('/url');
+            const response = await extra.api.get<Donation>('/url');
 
             if (!response.data) {
                 throw new Error();
