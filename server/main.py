@@ -1,3 +1,4 @@
+from flask_cors import CORS
 from flask import (
     Flask,
     request,
@@ -15,6 +16,7 @@ app=Flask(__name__)
 app.config['SECRET_KEY']='secret'
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://user:user@db:5432/db'
 db.init_app(app)
+cors=CORS(app)
 
 @app.route("/api/sign_up/telegram",methods=['POST'])
 def sign_up_telegram():
