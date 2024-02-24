@@ -2,21 +2,6 @@ li {
     list-style: inside;
 }
 
-ol,
-ul {
-    margin: 0;
-    padding: 0;
-
-    ol,
-    ul {
-        margin-left: 20px;
-    }
-
-    &:not(:first-child) {
-        margin-bottom: 10px;
-    }
-}
-
 body,
 h1,
 h2,
@@ -52,7 +37,7 @@ form {
     width: 75%;
 }
 
-.p-component {
+.p-breadcrumb {
     padding: 0;
     border: none;
     background: transparent;
@@ -69,4 +54,20 @@ form {
         color: var(--primary-color);
         text-decoration: none;
     }
+}
+
+.p-inputwrapper {
+    width: 100%;
+}
+
+.p-dropdown-items-wrapper {
+    width: 400px;
+}
+
+.p-dropdown-items {
+    overflow: auto;
+}
+
+.p-dropdown-item {
+    list-style: none;
 }
