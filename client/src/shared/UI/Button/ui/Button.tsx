@@ -9,16 +9,29 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
     children?: ReactNode;
     variant?: buttonVariants;
+    maxW?: boolean;
 }
 
 export const Button = memo((props: ButtonProps) => {
-    const { onClick, className, children, disabled, variant = 'primary', ...otherProps } = props;
+    const {
+        onClick,
+        className,
+        maxW,
+        children,
+        disabled,
+        variant = 'primary',
+        ...otherProps
+    } = props;
 
     const add = [variantsMapper[variant], className];
 
     return (
         <button
-            className={classNames(classes.Button, { [classes.disabled]: disabled }, add)}
+            className={classNames(
+                classes.Button,
+                { [classes.disabled]: disabled, [classes.maxW]: maxW },
+                add,
+            )}
             onClick={onClick}
             disabled={disabled}
             {...otherProps}

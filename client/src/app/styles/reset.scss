@@ -2,20 +2,15 @@ li {
     list-style: inside;
 }
 
-ol, ul {
-    margin: 0;
-    padding: 0;
-
-    ol, ul {
-        margin-left: 20px;
-    }
-
-    &:not(:first-child) {
-        margin-bottom: 10px;
-    }
-}
-
-body, h1, h2, h3, h4, h5, h6, textarea, p {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+textarea,
+p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -40,4 +35,56 @@ form {
 
 .p-tabview.p-component {
     width: 75%;
+}
+
+.p-breadcrumb {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.p-menuitem,
+.p-breadcrumb-home {
+    list-style: none;
+}
+
+.p-menuitem-link {
+    &:link,
+    &:visited {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+}
+
+.p-inputwrapper {
+    width: 100%;
+}
+
+.p-dropdown-items-wrapper {
+    width: 400px;
+}
+
+.p-dropdown-items {
+    overflow: auto;
+}
+
+.p-dropdown-item {
+    list-style: none;
+}
+
+.p-fileupload-choose {
+    width: 100%;
+    justify-content: center;
+
+    .p-button-label {
+        flex: none;
+    }
+}
+
+.p-button.p-component.p-fileupload-choose {
+    background: var(--button-bg-color);
+}
+
+.p-inputtext.p-component {
+    width: 100%;
 }

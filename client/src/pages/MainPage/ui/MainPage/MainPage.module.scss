@@ -1,3 +1,18 @@
-.disabled_list {
-    text-decoration: line-through;
+.MainPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.tgIcon {
+    width: 25px;
+    height: 21px;
+}
+
+.logo {
+    width: 200px;
+    height: 42px;
+    overflow: visible;
 }

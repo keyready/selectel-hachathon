@@ -1,0 +1,9 @@
+flask
+psycopg2-binary
+aiogram
+asyncio
+pydantic_settings
+requests
+pydantic
+flask_sqlalchemy
+flask_cors

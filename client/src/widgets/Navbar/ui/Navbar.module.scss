@@ -1,15 +1,25 @@
 .Navbar {
     width: 100%;
     height: var(--navbar-heigth);
-    padding: 0 100px;
     background: var(--bg-color);
     position: sticky;
     top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    width: 200px;
+    height: 42px;
+    overflow: visible;
 }
 
 @media (width <= 768px) {
     .Navbar {
-        padding: 0 50px;
+        padding: 20px 20px;
     }
 
+}
+
+.button {
+    padding: 5px 10px;
 }

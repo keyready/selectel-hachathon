@@ -1,0 +1,39 @@
+.MenuPage {
+
+}
+
+.button {
+    padding: 10px;
+
+    &:nth-child(2) {
+        background: #fff;
+        h3 { color: var(--donor-search-color); }
+    }
+
+    &:nth-child(3) {
+        background: #fff;
+        h3 { color: var(--donor-search-color); }
+    }
+
+    &:nth-child(9) {
+        background: #fff;
+        h3 { color: var(--donor-search-color); }
+    }
+
+    &:nth-child(11) {
+        background: #fff;
+        h3 { color: var(--donor-search-color); }
+    }
+
+    &:nth-child(4) {
+        background: #a185f1;
+    }
+
+    &:nth-child(5) {
+        background: #a185f1;
+    }
+
+    &:nth-child(6) {
+        background: #ed7091;
+    }
+}
