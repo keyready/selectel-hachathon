@@ -16,7 +16,7 @@ app=Flask(__name__)
 app.config['SECRET_KEY']='secret'
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://user:user@db:5432/db'
 db.init_app(app)
-cors=CORS(app)
+cors=CORS(app, resources={r"/api/*": {"origins": "https://selectel-hachathon.netlify.app/"}})
 
 @app.route("/api/sign_up/telegram",methods=['POST'])
 def sign_up_telegram():
