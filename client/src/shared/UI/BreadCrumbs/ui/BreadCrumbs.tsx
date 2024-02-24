@@ -10,10 +10,11 @@ import classes from './BreadCrumbs.module.scss';
 interface BreadCrumbsProps {
     className?: string;
     items: string[];
+    homeSource?: string;
 }
 
 export const BreadCrumbs = memo((props: BreadCrumbsProps) => {
-    const { className, items } = props;
+    const { className, homeSource, items } = props;
 
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ export const BreadCrumbs = memo((props: BreadCrumbsProps) => {
 
     const home: MenuItem = {
         icon: <HomeIcon className={classes.breadcrumbIcon} />,
-        url: RoutePath.menu,
+        url: homeSource || RoutePath.menu,
         command: (data) => {
             data.originalEvent.preventDefault();
             if (data.item.url) {

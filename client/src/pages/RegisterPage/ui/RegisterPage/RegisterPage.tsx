@@ -10,19 +10,23 @@ import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import toast from 'react-hot-toast';
 import { Loader } from 'shared/UI/Loader';
+import { BreadCrumbs } from 'shared/UI/BreadCrumbs';
 import classes from './RegisterPage.module.scss';
 
 interface RegisterPageProps {
     className?: string;
 }
 
+type RegisterTypes = 'new' | 'continue' | 'donor-search-login' | 'donor-search-reg';
+
 const RegisterPage = memo((props: RegisterPageProps) => {
     const { className } = props;
 
-    const { getSearchParams } = useURLParams();
+    const { getParam } = useURLParams();
 
-    const [registerType, setRegisterType] = useState<'new' | 'continue'>('new');
+    const [registerType, setRegisterType] = useState<RegisterTypes>('new');
     const [username, setUsername] = useState<string>();
+    const [firstName, setFirstName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,18 +35,39 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         if (registerType === 'new') {
             return !password || !email || !email.includes('@') || isLoading;
         }
-        return !email || !email.includes('@') || isLoading;
-    }, [email, isLoading, password, registerType]);
+        if (registerType === 'continue') return !email || !email.includes('@') || isLoading;
+        if (registerType === 'donor-search-reg')
+            return !firstName || !password || !email || !email.includes('@') || isLoading;
+        return !password || !email || !email.includes('@') || isLoading;
+    }, [email, firstName, isLoading, password, registerType]);
+
+    const items = useMemo<string[]>(() => ['Авторизация'], []);
 
     useEffect(() => {
-        const params = getSearchParams();
-        if (params.find((param) => param.param === 'username')) {
+        if (getParam('username')) {
             setRegisterType('continue');
-            setUsername(params.find((param) => param.param === 'username')?.value);
+            setUsername(getParam('username'));
+        } else if (getParam('register-type')) {
+            setRegisterType(getParam('register-type') as RegisterTypes);
         }
     }, []);
 
     const navigate = useNavigate();
+
+    const titleMapper = useMemo(() => {
+        switch (registerType) {
+            case 'new':
+                return 'Зарегистрируйтесь';
+            case 'continue':
+                return 'Завершите регистрацию';
+            case 'donor-search-login':
+                return 'Войдите с учетной записью DonorSearch';
+            case 'donor-search-reg':
+                return 'Зарегистрируйтесь через DonorSearch';
+            default:
+                return 'Зарегистрируйтесь';
+        }
+    }, [registerType]);
 
     const handleRegisterFinish = useCallback(
         (event: FormEvent<HTMLFormElement>) => {
@@ -81,19 +106,55 @@ const RegisterPage = memo((props: RegisterPageProps) => {
         [email, navigate, password],
     );
 
+    const handleRegisterFinishDonorSearch = useCallback(
+        (event: FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            setIsLoading(true);
+            fetch('http://localhost:5000/api/sign_up/donor-search', {
+                method: 'post',
+                body: JSON.stringify({ email, password, first_name: firstName }),
+                headers: { 'Content-Type': 'application/json' },
+            })
+                .then((res) => res.json())
+                .then(() => navigate(RoutePath.menu))
+                .catch(() => {
+                    setIsLoading(false);
+                    return toast.error('Произошла ошибка, попробуйте позже');
+                });
+        },
+        [email, firstName, navigate, password],
+    );
+
+    const handleLoginFinishDonorSearch = useCallback(
+        (event: FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            setIsLoading(true);
+            fetch('http://localhost:5000/api/sign_in/donor-search', {
+                method: 'post',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-Type': 'application/json' },
+            })
+                .then((res) => res.json())
+                .then(() => navigate(RoutePath.menu))
+                .catch(() => {
+                    setIsLoading(false);
+                    return toast.error('Произошла ошибка, попробуйте позже');
+                });
+        },
+        [email, navigate, password],
+    );
+
     return (
         <Page className={classNames(classes.RegisterPage, {}, [className])}>
+            <BreadCrumbs homeSource={RoutePath.main} items={items} />
+
             {isLoading && (
                 <div className={classes.loaderWrapper}>
                     <Loader />
                 </div>
             )}
 
-            <Text
-                title={registerType === 'new' ? 'Зарегистрируйтесь' : 'Завершите регистрацию'}
-                size="large"
-                align="center"
-            />
+            <Text title={titleMapper} size="large" align="center" />
 
             {registerType === 'continue' && (
                 <form onSubmit={handleRegisterFinish}>
@@ -105,6 +166,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
                     >
                         <InputText
                             placeholder="Введите почту"
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -128,6 +190,7 @@ const RegisterPage = memo((props: RegisterPageProps) => {
                     >
                         <InputText
                             placeholder="Введите почту"
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -141,6 +204,86 @@ const RegisterPage = memo((props: RegisterPageProps) => {
 
                         <Button type="submit" disabled={isButtonDisabled}>
                             Завершить регистрацию
+                        </Button>
+                    </VStack>
+                </form>
+            )}
+
+            {registerType === 'donor-search-reg' && (
+                <form onSubmit={handleRegisterFinishDonorSearch}>
+                    <VStack
+                        align="stretch"
+                        gap="24"
+                        maxW
+                        className={classes.continueRegisterWrapper}
+                    >
+                        <InputText
+                            placeholder="Введите почту"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+
+                        <InputText
+                            placeholder="Введите Ваше имя"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+
+                        <InputText
+                            placeholder="Введите пароль"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <Button type="submit" disabled={isButtonDisabled}>
+                            Завершить регистрацию
+                        </Button>
+
+                        <Button
+                            type="button"
+                            onClick={() => setRegisterType('donor-search-login')}
+                            variant="clear"
+                        >
+                            <Text align="center" text="Уже есть аккаунт на DonorSearch?" />
+                        </Button>
+                    </VStack>
+                </form>
+            )}
+
+            {registerType === 'donor-search-login' && (
+                <form onSubmit={handleLoginFinishDonorSearch}>
+                    <VStack
+                        align="stretch"
+                        gap="24"
+                        maxW
+                        className={classes.continueRegisterWrapper}
+                    >
+                        <InputText
+                            placeholder="Введите почту"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+
+                        <InputText
+                            placeholder="Введите пароль"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <Button type="submit" disabled={isButtonDisabled}>
+                            Завершить регистрацию
+                        </Button>
+
+                        <Button
+                            type="button"
+                            onClick={() => setRegisterType('donor-search-reg')}
+                            variant="clear"
+                        >
+                            <Text align="center" text="Еще нет учетной записи DonorSearch?" />
                         </Button>
                     </VStack>
                 </form>

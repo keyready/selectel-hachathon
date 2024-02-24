@@ -68,18 +68,24 @@ const MainPage = () => {
 
             <VStack gap="8" maxW justify="center" align="center">
                 <Text align="center" title="Войти с помощью" />
-                <Button onClick={() => navigate(RoutePath.menu)} maxW variant="telegram">
+                <Button onClick={handleTelegramLoginClick} maxW variant="telegram">
                     <HStack maxW justify="center" gap="8">
                         <Icon Svg={TelegramIcon} className={classes.tgIcon} />
-                        <Text align="center" title="Телеграм" />
+                        <Text align="center" title="Telegram" />
                     </HStack>
                 </Button>
+
                 <Text size="large" text="или" />
-                <Button onClick={handleTelegramLoginClick} maxW variant="donorSearch">
+                <Button
+                    onClick={() => navigate(`${RoutePath.register}?register-type=donor-search-reg`)}
+                    maxW
+                    variant="donorSearch"
+                >
                     <Icon Svg={MainLogoIcon} className={classes.logo} />
                 </Button>
+
                 <Text size="large" text="или" />
-                <Button maxW>
+                <Button onClick={() => navigate(`${RoutePath.register}?register-type=new`)} maxW>
                     <Text align="center" title="Зарегистрироваться" />
                 </Button>
             </VStack>
