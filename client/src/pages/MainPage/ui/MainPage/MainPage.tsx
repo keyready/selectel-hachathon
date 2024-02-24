@@ -32,9 +32,7 @@ const MainPage = () => {
 
     const handleTelegramLoginClick = useCallback(() => {
         const yourBotId: string = '6453776863';
-        const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${encodeURIComponent(
-            window.location.origin,
-        )}`;
+        const authUrl = `https://oauth.telegram.org/auth/url?bot_id=${yourBotId}&origin=${RoutePath.menu}`;
         window.location.href = authUrl;
     }, []);
 
